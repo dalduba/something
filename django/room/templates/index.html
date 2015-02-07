@@ -64,12 +64,16 @@
                     <th class="table1">Players</th>
                     <th class="table1">Ping</th>
                 </tr>
+                {% for room in rooms %}
                 <tr class="table1">
-                    <td><input type="radio" name="radQ3" value="0" id="q1" title="strongly agree"/>Room1</td>
+
+                    <td><input type="radio" name="radQ3" value="0" id="q1" title="strongly agree"/>{{ room.name }}</td>
+                    <td>{{ room.mapname }}</td>
                     <td></td>
                     <td></td>
-                    <td></td>
+
                 </tr>
+                {% endfor %}
 
             </table>
         </td>
