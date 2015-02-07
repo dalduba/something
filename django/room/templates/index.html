@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        tr.table1:hover { background-color : #89ae37; }
+
+        table.table1 {
+        border-collapse: collapse;
+        border: 2px solid black;
+        width: 100%;
+        }
+
+        table, th.table1 {
+        border: 2px solid black;
+        }
+
+        table, td.outside {
+        border: 0;
+        }
+
+        table, td {
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        }
+        table, td.login {
+        border: 0;
+        }
+
+        table.table2 {border: 0;  width: 100%;}
+        table.outside {border: 0; width: 60%;}
+
+        table.login {border: 0;}
+
+
+    </style>
+</head>
+<body>
+
+<h1 style="color:black;margin-left:30px;">Chouse your login and join!</h1>
+
+<table class="outside">
+    <tr>
+        <td class="outside">
+            <table class="login">
+
+                <tr>
+                    <th>Login</th>
+                </tr>
+                <tr>
+                    <td class="login"><input type="edit" name="login" value="dal" id="login"/></td>
+
+                    <td class="login"><input type="button" name="join" value="JOIN" id="join"/></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="outside">
+            <table class="table1">
+                <tr>
+                    <th class="table1">Room</th>
+                    <th class="table1">Map</th>
+                    <th class="table1">Players</th>
+                    <th class="table1">Ping</th>
+                </tr>
+                <tr class="table1">
+                    <td><input type="radio" name="radQ3" value="0" id="q1" title="strongly agree"/>Room1</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </table>
+        </td>
+        <td class="outside">
+            <table class="table1">
+                <tr>
+                    <th class="table1">Now Playing</th>
+                    <th class="table1">Ping</th>
+                </tr>
+                <tr>
+                    <td>player</td>
+                    <td>2</td>
+
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+
+
+</table>
+
