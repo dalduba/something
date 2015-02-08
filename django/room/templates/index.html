@@ -36,9 +36,18 @@
     </style>
 </head>
 <body>
-
+<script type="text/javascript">
+    function join () {
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', 'admin/');
+    form.style.display = 'hidden';
+    document.body.appendChild(form)
+    form.submit();
+}
+</script>
 <h1 style="color:black;margin-left:30px;">Chouse your login and join!</h1>
-
+<form action="admin/">
 <table class="outside">
     <tr>
         <td class="outside">
@@ -50,7 +59,7 @@
                 <tr>
                     <td class="login"><input type="edit" name="login" value="dal" id="login"/></td>
 
-                    <td class="login"><input type="button" name="join" value="JOIN" id="join"/></td>
+                    <td class="login"><input type="submit" value="JOIN"/></td>
                 </tr>
             </table>
         </td>
@@ -66,11 +75,15 @@
                 </tr>
                 {% for room in rooms %}
                 <tr class="table1">
-
-                    <td><input type="radio" name="radQ3" value="0" id="q1" title="strongly agree"/>{{ room.name }}</td>
+                    {% if forloop.first %}
+                    <td><input type="radio" name="room" value="{{ room.name }}" checked/>{{ room.name }}</td>
+                    {% else %}
+                    <td><input type="radio" name="room" value="{{ room.name }}" />{{ room.name }}</td>
+                    {% endif %}
                     <td>{{ room.mapname }}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ room.players }}</td>
+                    <td>{{ room.ping }}</td>
+
 
                 </tr>
                 {% endfor %}
@@ -96,3 +109,6 @@
 
 </table>
 
+</form>
+</body>
+</html>
