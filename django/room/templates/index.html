@@ -34,19 +34,79 @@
 
 
     </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+function getCookie(name) {
+var cookieValue = null;
+if (document.cookie && document.cookie != '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+        }
+    }
+}
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+console.log(csrftoken);
+
+//Ajax call
+function csrfSafeMethod(method) {
+// these HTTP methods do not require CSRF protection
+return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    crossDomain: false, // obviates need for sameOrigin test
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type)) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+$(document).ready(function(){
+$("input[name='room']").change(function(){
+    // Do something interesting here
+    room_name = $( "input[name='room']:checked" ).val();
+    $.getJSON("roomdetails",
+        {
+          type: "room_details",
+          room_name: room_name,
+        },
+        function(data){
+        var r = new Array(), j = -1;
+        r[++j] ='<tr>';
+        r[++j] ='<th class="table1">Now Playing</th>';
+        r[++j] ='<th class="table1">Ping</th>'
+        r[++j] ='<tr>';
+          $.each(data, function(key, val){
+              r[++j] ='<tr>';
+              r[++j] ='<td>';
+              r[++j] = val.player;
+
+              r[++j] ='</td>';
+              r[++j] ='<td>';
+              r[++j] = val.ping;
+              r[++j] ='</td>';
+              r[++j] = '</tr>';
+           });
+        $('#playersTable').html(r.join(''));
+
+
+
+
+        });
+});
+});
+</script>
 </head>
 <body>
-<script type="text/javascript">
-    function join () {
-    var form = document.createElement('form');
-    form.setAttribute('method', 'post');
-    form.setAttribute('action', 'admin/');
-    form.style.display = 'hidden';
-    document.body.appendChild(form)
-    form.submit();
-}
-</script>
-<h1 style="color:black;margin-left:30px;">Chouse your login and join!</h1>
+<h1 style="color:black;margin-left:30px;">Choose your login and join!</h1>
 <form action="admin/">
 <table class="outside">
     <tr>
@@ -91,7 +151,7 @@
             </table>
         </td>
         <td class="outside">
-            <table class="table1">
+            <table class="table1" id="playersTable">
                 <tr>
                     <th class="table1">Now Playing</th>
                     <th class="table1">Ping</th>
